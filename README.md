@@ -12,6 +12,7 @@ numpy matrix?).
 Worth to mention in the script
 •	IDs need to have the same number of measurements.
 •	If dataframe has more than 3 columns, everything is ignored from the 4th column
+•	Time points need to be evenly distributed - we can add missing data which is after imputed - minimum 4 time points
 
 To do
 Normalization? Image vector
