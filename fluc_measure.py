@@ -6,7 +6,7 @@ Created on Thu Oct 15 12:53:14 2020
 """
 
 import numpy as np
-import datacheck as dc
+import data_check as dc
 
 #test = ([0,5,30,60,120],[4,5,8,7,4])
 #test = ([0,30,60,90,120],[4,5,8,7,4])
