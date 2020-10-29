@@ -1,3 +1,29 @@
+
+
+Example of import and how to use package:
+
+test = ([0,30,60,90],[4,7,7,4])
+
+import FLUCbio.functions.fluc_measure as fm
+import FLUCbio.functions.impute_data as id
+import FLUCbio.functions.image_interpretation as ii
+
+
+
+fluc_measure = fm.fluc_measure(test)
+print(fluc_measure)
+
+# when missing value
+
+test = ([0,30,60,90],[4,np.nan,7,4])
+imputed_data = id.impute_data(test).imputed
+fluc_measure = fm.fluc_measure(imputed_data)
+
+# and image 
+image = ii.image_interpretation(test).image
+
+
+
 # fluctuation_modelling-
 Python package for fluctuation modelling on longitudinal biological data
 
