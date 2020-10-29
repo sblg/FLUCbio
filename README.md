@@ -13,13 +13,13 @@ import FLUCbio.functions.image_interpretation as ii
 fluc_measure = fm.fluc_measure(test)
 print(fluc_measure)
 
-# when missing value
+ when missing value
 
 test = ([0,30,60,90],[4,np.nan,7,4])
 imputed_data = id.impute_data(test).imputed
 fluc_measure = fm.fluc_measure(imputed_data)
 
-# and image 
+ and image 
 image = ii.image_interpretation(test).image
 
 
