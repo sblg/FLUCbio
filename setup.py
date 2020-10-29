@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
-import FlucAnalysis
 
 with open("README.md", "r") as fh:
 		long_description = fh.read()
 		
-setup(name='FlucAnalysis',
-      version=FlucAnalysis.__version__,
+setup(name='FLUCbio',
+      #version=FlucAnalysis.__version__,
       # metadata
       author='Cecilia Bang Jensen',
       author_email='ceciliabjensen@gmail.com',
@@ -16,7 +15,7 @@ setup(name='FlucAnalysis',
       long_description_content_type="text/markdown",
       license='XXX',
       url='http://.github.io/',
-      packages=['flucAnalysis',],
+      packages=['FLUCbio',],
       zip_safe=False,
       classifiers=[
         "Development Status :: 4 - Beta",
