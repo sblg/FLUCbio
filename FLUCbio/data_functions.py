@@ -343,16 +343,15 @@ class dataClass:
 
 def lower_bounds(self):
 	
-	if self.lower_bound is None:
+	if not self.lower_bound:
 		y_min = min(self.input[1])
-	if self.upper_bound is None:
-		y_max = max(self.input[1])
-		
-	if self.lower_bound is not None:
+	else:
 		y_min = self.lower_bound
-	if self.upper_bound is not None:
+	if not self.upper_bound:
+		y_max = max(self.input[1])
+	else:
 		y_max = self.upper_bound
-		
+			
 	y_range = y_max-y_min
 	x_lbounds = [1]
 	y_lbounds = [y_min]
