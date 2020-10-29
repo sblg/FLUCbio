@@ -7,7 +7,7 @@ test = ([0,30,60,90],[4,7,7,4])
 import FLUCbio.functions.fluc_measure as fm
 import FLUCbio.functions.impute_data as id
 import FLUCbio.functions.image_interpretation as ii
-
+import FLUCbio.functions.clust_sum as cs
 
 
 fluc_measure = fm.fluc_measure(test)
@@ -22,6 +22,9 @@ fluc_measure = fm.fluc_measure(imputed_data)
  and image 
 image = ii.image_interpretation(test).image
 
+and from image to clustsum and sum
+
+cluster_sum, sum_ones = cs.clust_sum(image)
 
 
 # fluctuation_modelling-
