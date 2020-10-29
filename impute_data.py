@@ -4,7 +4,7 @@ Created on Thu Oct 15 14:10:48 2020
 
 @author: Cecilia Bang Jensen
 """
-import datacheck as dc
+import data_check as dc
 import numpy as np  # can be removed
 import pandas as pd  # can be removed
 
