@@ -5,8 +5,11 @@ Example of import and how to use package:
 test = ([0,30,60,90],[4,7,7,4])
 
 import FLUCbio.functions.fluc_measure as fm
+
 import FLUCbio.functions.impute_data as id
+
 import FLUCbio.functions.image_interpretation as ii
+
 import FLUCbio.functions.clust_sum as cs
 
 
