@@ -6,23 +6,17 @@ Created on Thu Oct 15 12:53:14 2020
 """
 
 import numpy as np
-import data_check as dc
-
-#test = ([0,5,30,60,120],[4,5,8,7,4])
-#test = ([0,30,60,90,120],[4,5,8,7,4])
-test = ([0,30,60,90,120],[4,'hej',8,7,4])
-#test = [[0,'hej',60,90,120],[4,5,8,7,4]]
-
+import FLUCbio.data_functions as data_tools
 
 def flucMeasure(postprandial_data):
 	""" Calculates a measure of fluctuation expecting evenly distributed data """
 	
 	# Check data input
-	data_info = dc.dataClass(postprandial_data)  
-	postprandial_data = dc.dataClass.data_check(data_info,nan=False)  
+	data_info = data_tools.dataClass(postprandial_data)  
+	data_tools.dataClass.data_check(data_info, nan=False)  
 	
 	# Extract variable measures
-	pp_list = postprandial_data[1]
+	pp_list = data_info.input[1]
 	
 	# Calculate measure of fluctuation
 	differences,differences_of_diff = [],[] 
@@ -42,6 +36,3 @@ def flucMeasure(postprandial_data):
 	
 	return(flucResult)
 
-
-result = flucMeasure(test)
-print(result)
