@@ -42,7 +42,9 @@ Interpolation
 
 ## Functions
 
-__ fluc_measure() __
+### * fluc_measure() *
+
+
 
 
 
