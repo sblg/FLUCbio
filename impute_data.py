@@ -36,7 +36,7 @@ def impute_data(postprandial_data, imputation_type=None):
 	return(data_info)
 
 
-resulting_data = impute_data(test,imputation_type='cubic')
+#resulting_data = impute_data(test,imputation_type='cubic')
 
 # linear can not run if first element is nan?
 # ValueError: A value in x_new is below the interpolation range.
