@@ -5,7 +5,7 @@ Created on Thu Oct 15 12:52:55 2020
 @author: Cecilia Bang Jensen
 """
 
-import FlucAnalysis.data_functions as data_tools
+import FLUCbio.data_functions as data_tools
 import pandas as pd
 import numpy as np
 
