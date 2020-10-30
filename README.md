@@ -42,10 +42,13 @@ Interpolation
 
 ## Functions
 
-### * fluc_measure() *
+*** fluc_measure() ***
 
+*** impute_data() ***
 
+*** image_interpretation() ***
 
+*** clust_sum() ***
 
 
 ## Examples
