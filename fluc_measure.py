@@ -8,7 +8,7 @@ Created on Thu Oct 15 12:53:14 2020
 import numpy as np
 import FLUCbio.data_functions as data_tools
 
-def flucMeasure(postprandial_data):
+def fluc_measure(postprandial_data):
 	""" Calculates a measure of fluctuation expecting evenly distributed data """
 	
 	# Check data input
@@ -31,8 +31,8 @@ def flucMeasure(postprandial_data):
 	   if i != 0:
 		   differences_of_diff.append(abs(differences[i] - differences[i-1]))
    
-	flucResult = sum(differences_of_diff)
-	assert flucResult >= 0, "Fluctuation should be positive"
+	fluc_result = sum(differences_of_diff)
+	assert fluc_result >= 0, "Fluctuation should be positive"
 	
-	return(flucResult)
+	return(fluc_result)
 
