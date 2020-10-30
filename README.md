@@ -1,22 +1,15 @@
 
 **Analysing fluctuation and/or variation in biological data**
 
+Description here
 
-
-<hr>
-
-some text here
-
-<br>
-
-some text here
-
-
-Example of import and how to use package:
-
-test = ([0,30,60,90],[4,7,7,4])
-
-import FLUCbio.functions.fluc_measure as fm
+## Examples
+```python
+# define a sample
+>>> test = ([0,30,60,90],[4,7,7,4])
+>>> import FLUCbio
+>>> FLUCbio.fluc_measure(test)
+```
 
 import FLUCbio.functions.impute_data as id
 
