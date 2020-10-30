@@ -40,6 +40,11 @@ Imputation
 Interpolation
 •	which is default? Should it always be the same or should we make a check and then do most appropriate one? Maybe a function to check for this.
 
+## Functions
+
+__ fluc_measure() __
+
+
 
 ## Examples
 
