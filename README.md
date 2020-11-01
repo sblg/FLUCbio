@@ -1,22 +1,24 @@
 
 # Analysing fluctuation and/or variation in biological data
 
-Python package for fluctuation modelling on longitudinal biological data
+FLUCbio is a python toolbox package useful for obtaining measures of fluctuation/variation for longitudinal biological data. This can be particularly helpful if the data is to be used in machine learning algorithms. 
 
-The package includes a main function ‘fluctuations’ for pre-processing of longitudinal fluctuating biological data to make it useful for machine learning setups. 
+Describe functions:
 
-A sample class is first created and then the function can be
-run on the class to calculate the various information
-measures. The input data has to be a pandas dataframe (or
-numpy matrix?).
+Functions for calculating a measure of fluctuation based on summing up a discrete second derivative thereby catching how peaky and volatile the observed measures are. Another function can turn the observed measures into a image like grid with binary values for where the observed values are located (true/1) and this “image” can in turn be evaluated for how peaky and volatile it is by summing up the number of true/1 values. 
 
 
+The example is based on a postprandial variable blood glucose.
 
 
-Worth to mention in the script
-•	IDs need to have the same number of measurements.
-•	If dataframe has more than 3 columns, everything is ignored from the 4th column
-•	Time points need to be evenly distributed - we can add missing data which is after imputed - minimum 4 time points
+
+Input data is the longitudinal biological data for one sample and can be in a number of data types being numpy array, tuple, list of lists and pandas dataframe.
+
+Data has to be evenly distributed meaning the same time interval between observations/measurements. If a data point is missing completely or is a NaN a function can impute the missing data point.
+
+
+
+
 
 To do
 Normalization? Image vector
