@@ -372,7 +372,7 @@ def lower_bounds(self):
 class getData:
 	def __init__(self, data=None):
 		if data=='test_glucose':
-			self.data = pd.read_csv('./FLUCbio/test/test_data.csv', header=None)   # give a github link https://.github.io/assets/posts/reg/test_reg.csv")
+			self.data = pd.read_csv('./FLUCbio/test_data.csv', header=None)   # give a github link https://.github.io/assets/posts/reg/test_reg.csv")
 		elif data=='another_example':
 			self.data = pd.read_csv('https://.github.io/assets/posts/reg/boston.csv')   
 		else:
