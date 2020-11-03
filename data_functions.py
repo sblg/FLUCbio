@@ -360,7 +360,7 @@ def lower_bounds(self):
 	
 	# CREATE GRID LOWER BOUNDARIES 
 	# OBS. explain this here - is loop necessary or can this be combined with above
-	for i in np.arange(1+(self.num_timepoints-1)/self.grid_size, self.num_timepoints, (self.num_timepoints-1)/self.grid_size):
+	for i in np.arange(1+(self.num_timepoints-1)/self.grid_size, self.num_timepoints-(self.num_timepoints-1)/self.grid_size, (self.num_timepoints-1)/self.grid_size):
 		x_lbounds.append(i)
 		temp_y = y_lbounds[j]
 		y_lbounds.append(temp_y+y_range/self.grid_size)
