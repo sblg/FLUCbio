@@ -67,6 +67,8 @@ these has to be checked.. and implemented
 
 ## Functions
 
+***_fluc_measure()_***
+
 `FLUCbio.fluc_measure(data)`
 
 Parameters | Type | Description
@@ -74,8 +76,9 @@ Parameters | Type | Description
 `data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
 
 
+***_impute_data()_***
 
-`FLUCbio.impute_data(data, imputation_type)`
+`FLUCbio.impute_data(data, imputation_type, adj_nan)`
 
 The impute function is used before the other tools in case of missing data or unevenly distanced data points. 
 There is an upper limit for imputation of 25% missing data. If more missing data than this the function will raise an error. Furthermore is it possible to put a limit on how many missing values can be next to each other. If too many are next to each other, it is hard to impute getting a realistic output. The _adj_nan_ parameter is choosing how many adjacent nan or missing values can be accepted. The imputation is done using scipy.interpolate.interp1d and therefore accepts input that this function would take.
@@ -86,6 +89,8 @@ Parameters | Type | Description
 `data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
 `imputation_type` |_str or int, optional_ |(from scipy.interpolate.interp1d: Specifies the kind of interpolation as a string (‘linear’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘previous’, ‘next’, where ‘zero’, ‘slinear’, ‘quadratic’ and ‘cubic’ refer to a spline interpolation of zeroth, first, second or third order; ‘previous’ and ‘next’ simply return the previous or next value of the point) or as an integer specifying the order of the spline interpolator to use. Default is ‘linear’.)
 `adj_nan` |_int, optional_ |Maximum number of adjacent nan/missing values. Default is 2.
+
+***_image_interpretation()_***
 
 `FLUCbio.image_interpretation(data, num_interp_pts, grid_size, interpolation_type, lower_bound, upper_bound)`
 
@@ -98,6 +103,7 @@ Parameters | Type | Description
 `lower_bound` |_int or float, optional_ |A value for lower boundary of the grid. Default is minimum measured value of input data.
 `upper_bound` |_int or float, optional_ |A value for upper boundary of the grid. Default is maximum measured value of input data.
 
+***_clust_sum()_***
 
 `FLUCbio.clust_sum(image)`
 
