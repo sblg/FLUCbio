@@ -31,12 +31,13 @@ Another measure can provide information on variation rather than fluctuation:
 <b> Imaging approach </b>
 
 
-Another function can turn the observed measures into a image like grid with binary values for where the observed values are located (true/1) and this “image” can in turn be evaluated for how peaky and volatile it is by summing up the number of true/1 values. 
+
+Another function can turn the observed measures into an image using a grid, curvefitting+interpolation and a grid search returning a vector with binary values (0 for pixels/grid squares with no observed value and 1 for pixels with observed value). This “image” can in turn be evaluated for how peaky and volatile it is by looking at the pattern of and number of 1's. 
 
 
 <b> Sum of ones </b>
 
-From the image a measure of fluctuation can be achieved by summing up all the 1's in the vector. The higher this number is the more fluctuating a curve.
+From the image a measure of fluctuation can be achieved by summing up all the 1's in the vector. The higher the number, the more fluctuating a curve.
 
 
 <b> Clustered sum of ones </b>
@@ -68,7 +69,7 @@ these has to be checked.. and implemented
 
 Parameters | Type | Description
 ------------ | -------------  | ---------------------
-`data` |_pandas dataframe, numpy array, list of list or tuple_ |blabla
+`data` |_pandas dataframe, numpy array, list of list or tuple_ |Data will be 
 
 
 
