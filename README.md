@@ -1,22 +1,28 @@
 
 # Analysing fluctuation and/or variation in biological data
 
-FLUCbio is a python toolbox package useful for obtaining measures of fluctuation/variation for longitudinal biological data. This can be particularly helpful if the data is to be used in machine learning algorithms. 
+FLUCbio is a python toolbox package useful for obtaining measures of fluctuation/variation for longitudinal biological data. This can be particularly helpful if the data is to be used in certain methods/tools expecting the data to be independent of time (eg. using a Random Forest in Machine Learning). 
 
-Describe functions:
-
-Functions for calculating a measure of fluctuation based on summing up a discrete second derivative thereby catching how peaky and volatile the observed measures are. Another function can turn the observed measures into a image like grid with binary values for where the observed values are located (true/1) and this “image” can in turn be evaluated for how peaky and volatile it is by summing up the number of true/1 values. 
+The package uses simple methods to obtain fluctuation measure both to keep it logical and to not overcompensate making it unusable for small data sets. The input must be measurements of the biological variable eg. blood marker and the time points at which these were taken (given in a time unit). For now all measures are based on evenly distributed data (consistent time interval between measurements) but if a few measurements are not taken due to clinical setup the missing data points can be imputed. Missing values can be imputed as well.
 
 
-The example is based on a postprandial variable blood glucose.
+
+
+Describe measures that can be obtained by the package:
+
+Functions for calculating a measure of fluctuation based on summing up a discrete second derivative thereby catching how peaky and volatile the observed measures are. 
+
+Another function can turn the observed measures into a image like grid with binary values for where the observed values are located (true/1) and this “image” can in turn be evaluated for how peaky and volatile it is by summing up the number of true/1 values. 
+
+
 
 
 
 Input data is the longitudinal biological data for one sample and can be in a number of data types being numpy array, tuple, list of lists and pandas dataframe.
 
+
+
 Data has to be evenly distributed meaning the same time interval between observations/measurements. If a data point is missing completely or is a NaN a function can impute the missing data point.
-
-
 
 
 
@@ -42,24 +48,80 @@ Imputation
 Interpolation
 •	which is default? Should it always be the same or should we make a check and then do most appropriate one? Maybe a function to check for this.
 
+
+## Quick Install
+these has to be checked.. and implemented 
+- install the latest version (from GitHub): `pip install git+git://github.com/sblg/FLUCbio.git#egg=FLUCbio`
+- install the latest PyPI version: `pip install FLUCbio`
+- install FLUCbio via conda-forge: `conda install FLUCbio -c conda-forge`
+
+
+
+
 ## Functions
 
 ***fluc_measure()***
+
+<b>fluc_measure</b>
+
+latest update v0.8.8 ??
+
+`FLUCbio.fluc_measure(data)`
+
+Parameters | Description
+------------ | -------------
+`data` |Pandas dataframe, numpy array, list of list or tuple are accepted inputs
+
+
 
 
 
 ***impute_data()***
 
+<b>impute_data</b>
+
+`FLUCbio.fluc_measure(data,imputation_type)`
+
+Parameters | Description
+------------ | -------------
+`data` |Pandas dataframe, numpy array, list of list or tuple are accepted inputs
+`imputation_type` |str or int 
+
+
 
 
 ***image_interpretation()***
+
+<b>impute_data</b>
+
+`FLUCbio.image_interpretation(data,imputation_type)`
+
+Parameters | Description
+------------ | -------------
+`data` |Pandas dataframe, numpy array, list of list or tuple are accepted inputs
+`imputation_type` |str or int 
 
 
 
 ***clust_sum()***
 
+<b>clust_sum</b>
+
+`FLUCbio.clust_sum(data,imputation_type)`
+
+Parameters | Description
+------------ | -------------
+`data` |Pandas dataframe, numpy array, list of list or tuple are accepted inputs
+`imputation_type` |str or int 
+
+
+
 
 ## Examples
+
+
+The example is based on a postprandial (after meal) variable blood glucose.
+
 
 ```python
 >>> import FLUCbio
@@ -69,12 +131,6 @@ Interpolation
 >>> image = FLUCbio.image_interpretation(imputed_glucose_sample).image
 >>> cluster_sum, summed_ones = FLUCbio.clust_sum(image)
 ```
-
-## Quick Install
-these has to be checked.. and implemented 
-- install the latest version (from GitHub): `pip install git+git://github.com/sblg/FLUCbio.git#egg=FLUCbio`
-- install the latest PyPI version: `pip install FLUCbio`
-- install FLUCbio via conda-forge: `conda install FLUCbio -c conda-forge`
 
 #### Requirements
 check requirements for different python versions???
