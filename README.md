@@ -3,7 +3,7 @@
 
 FLUCbio is a python toolbox package useful for obtaining measures of fluctuation/variation for longitudinal biological data. This can be particularly helpful if the data is to be used in certain methods/tools expecting the data to be independent of time (eg. using a Random Forest in Machine Learning). 
 
-The package uses simple methods to obtain fluctuation measure both to keep it logical and to not overcompensate making it unusable for small data sets. The input must be measurements of the biological variable eg. blood marker and the time points at which these were taken (given in a time unit). For now all measures are based on evenly distributed data (consistent time interval between measurements) but if a few measurements are not taken due to clinical setup the missing data points can be imputed. Missing values can be imputed as well.
+The package uses simple methods to obtain fluctuation measure both to keep it logical and to not overcompensate making it unusable for small data sets. The input must be measurements of the biological variable eg. blood marker and the time points at which these were taken (given in a time unit). For now all measures are based on evenly distributed data (consistent time interval between measurements) but if a few measurements are not taken due to clinical setup the missing data points can be imputed together with missing values (using interpolating function).
 
 
 Describe measures that can be obtained by the package:
