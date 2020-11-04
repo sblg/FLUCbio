@@ -51,21 +51,8 @@ Another way of summing the 1's from the image vector is to not sum all 1's but o
 
 Data has to be evenly distributed meaning the same time interval between observations/measurements. If a data point is missing completely or is a NaN a function can impute the missing data point.
 
-
-
 Using various input arguments the user can get specialized output. It is possible to choose a number of points to
 interpolate between true samples, a type of interpolation and some ways to handle missing data. 
-
-
-Missing data 
-•	Percentage limit 
-•	Different ways to impute?
-•	Error messages if too much missing? And information on what has been imputed on
-
-Imputation
-
-Interpolation
-•	which is default? Should it always be the same or should we make a check and then do most appropriate one? Maybe a function to check for this.
 
 
 ## Quick Install
@@ -79,41 +66,44 @@ these has to be checked.. and implemented
 
 `FLUCbio.fluc_measure(data)`
 
-Parameters | Description
------------- | -------------
-`data` |Pandas dataframe, numpy array, list of list or tuple are accepted inputs
+Parameters | Type | Description
+------------ | -------------  | ---------------------
+`data` |_pandas dataframe, numpy array, list of list or tuple_ |blabla
 
 
 
 `FLUCbio.impute_data(data, imputation_type)`
 
-Parameters | Description
------------- | -------------
-`data` |Pandas dataframe, numpy array, list of list or tuple are accepted inputs
-`imputation_type` |str or int 
+Missing data 
+•	Percentage limit 
+•	Different ways to impute?
+•	Error messages if too much missing? And information on what has been imputed on
+
+
+Parameters | Type | Description
+------------ | ------------- | ---------------------
+`data` |_pandas dataframe, numpy array, <br/>list of list or tuple_ |blablabla
+`imputation_type` |_str or int, optional_ |default
 
 
 `FLUCbio.image_interpretation(data, num_interp_pts, grid_size, interpolation_type, lower_bound, upper_bound)`
 
 Parameters | Type | Description
 ------------ | ------------- | ---------------------
-`data` |Pandas dataframe, numpy array,<br/> list of list or tuple |blablabla
-`num_interp_pts` |int |blablabla
-`grid_size` |int |blablabla
-`interpolation_type` |str or int |blablabla
-`lower_bound` |int or float |blablabla
-`upper_bound` |int or float |blablabla
+`data` |_pandas dataframe, numpy array,<br/> list of list or tuple_ |blablabla
+`num_interp_pts` |_int, optional_ |blablabla
+`grid_size` |_int, optional_ |blablabla
+`interpolation_type` |_str or int, optional_ |blablabla
+`lower_bound` |_int or float, optional_ |blablabla
+`upper_bound` |_int or float, optional_ |blablabla
 
 
 `FLUCbio.clust_sum(image)`
 
 Parameters | Type | Description
 ------------ | ------------- | ----------------
-`image` |numpy array or list | blablabla
+`image` |_numpy array or list_ | blablabla
  
-
-
-
 
 ## Examples
 
