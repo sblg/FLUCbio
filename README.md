@@ -71,7 +71,7 @@ these has to be checked.. and implemented
 
 Parameters | Type | Description
 ------------ | -------------  | ---------------------
-`data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
+`data` |_pandas dataframe, numpy array, <br/>list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
 
 
 
@@ -85,7 +85,7 @@ Parameters | Type | Description
 ------------ | ------------- | ---------------------
 `data` |_pandas dataframe, numpy array, <br/>list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
 `imputation_type` |_str or int, optional_ |(from scipy.interpolate.interp1d: Specifies the kind of interpolation as a string (‘linear’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘previous’, ‘next’, where ‘zero’, ‘slinear’, ‘quadratic’ and ‘cubic’ refer to a spline interpolation of zeroth, first, second or third order; ‘previous’ and ‘next’ simply return the previous or next value of the point) or as an integer specifying the order of the spline interpolator to use. Default is ‘linear’.)
-`adj_nan` |_int, optional_ |Default is 2.
+`adj_nan` |_int, optional_ |Maximum number of adjacent nan/missing values. Default is 2.
 
 `FLUCbio.image_interpretation(data, num_interp_pts, grid_size, interpolation_type, lower_bound, upper_bound)`
 
