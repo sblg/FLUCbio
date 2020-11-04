@@ -10,12 +10,7 @@ Describe measures that can be obtained by the package:
 
 <b> fluc_measures </b>
 
-h<sub>&theta;</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x
-
-fluc(y) = \sum<sub>{i=2}</sub><sup>{len(x)-1}</sup> 
-
-
-abs((y_i-y_{i-1})-(y_{i+1}-y_i))$
+<img src="https://latex.codecogs.com/gif.latex?fluc(y)&space;=&space;\sum_{i=2}^{len(x)-1}abs((y_i-y_{i-1})-(y_{i&plus;1}-y_i))" title="fluc(y) = \sum_{i=2}^{len(x)-1}abs((y_i-y_{i-1})-(y_{i+1}-y_i))" />
 
 <b> fluc_measure2 </b>
 
