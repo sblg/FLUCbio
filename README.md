@@ -6,9 +6,20 @@ FLUCbio is a python toolbox package useful for obtaining measures of fluctuation
 The package uses simple methods to obtain fluctuation measure both to keep it logical and to not overcompensate making it unusable for small data sets. The input must be measurements of the biological variable eg. blood marker and the time points at which these were taken (given in a time unit). For now all measures are based on evenly distributed data (consistent time interval between measurements) but if a few measurements are not taken due to clinical setup the missing data points can be imputed. Missing values can be imputed as well.
 
 
-
-
 Describe measures that can be obtained by the package:
+
+<b> fluc_measures </b>
+
+$$fluc(y) = \sum_{i=2}^{len(x)-1} abs((y_i-y_{i-1})-(y_{i+1}-y_i))$$
+
+<b> fluc_measure2 </b>
+
+
+
+<b> sum_ones </b>
+
+<b> clust_sum </b>
+
 
 Functions for calculating a measure of fluctuation based on summing up a discrete second derivative thereby catching how peaky and volatile the observed measures are. 
 
@@ -62,8 +73,6 @@ these has to be checked.. and implemented
 
 ***fluc_measure()***
 
-<b>fluc_measure</b>
-
 latest update v0.8.8 ??
 
 `FLUCbio.fluc_measure(data)`
@@ -75,12 +84,11 @@ Parameters | Description
 
 
 
-
 ***impute_data()***
 
-<b>impute_data</b>
 
-`FLUCbio.fluc_measure(data,imputation_type)`
+
+`FLUCbio.impute_data(data, imputation_type)`
 
 Parameters | Description
 ------------ | -------------
@@ -92,36 +100,35 @@ Parameters | Description
 
 ***image_interpretation()***
 
-<b>impute_data</b>
-
-`FLUCbio.image_interpretation(data,imputation_type)`
+`FLUCbio.image_interpretation(data, num_interp_pts, grid_size, interpolation_type, lower_bound, upper_bound)`
 
 Parameters | Description
 ------------ | -------------
 `data` |Pandas dataframe, numpy array, list of list or tuple are accepted inputs
-`imputation_type` |str or int 
+`num_interp_pts` |int 
+`grid_size` |int 
+`interpolation_type` |str or int 
+`lower_bound` |int or float
+`upper_bound` |int or float 
 
 
 
 ***clust_sum()***
 
-<b>clust_sum</b>
 
-`FLUCbio.clust_sum(data,imputation_type)`
+`FLUCbio.clust_sum(image)`
 
 Parameters | Description
 ------------ | -------------
-`data` |Pandas dataframe, numpy array, list of list or tuple are accepted inputs
-`imputation_type` |str or int 
+`image` |numpy array or list
+ 
 
 
 
 
 ## Examples
 
-
 The example is based on a postprandial (after meal) variable blood glucose.
-
 
 ```python
 >>> import FLUCbio
@@ -132,7 +139,7 @@ The example is based on a postprandial (after meal) variable blood glucose.
 >>> cluster_sum, summed_ones = FLUCbio.clust_sum(image)
 ```
 
-#### Requirements
+## Requirements
 check requirements for different python versions???
 - [Python](https://www.python.org) 3.7.3 (others?)           
 - [NumPy](http://www.numpy.org) >= 1.16.4
