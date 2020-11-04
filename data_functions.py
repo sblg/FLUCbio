@@ -173,7 +173,16 @@ class dataClass:
 		self.imputed = self.evenly_dist.copy()
 		self.num_timepoints = len(np.unique(self.evenly_dist[0]))
 	
-	def impute_data(self):
+	def impute_data(self,adj_nan):
+		
+		# Check how many nan are adjacent
+		bool_nan = np.isnan(self.imputed)		
+		count_dups = [sum(True for _ in group) for _, group in itertools.groupby(bool_nan[1]) if _ == True]
+		adj_nans = 0
+		for i in count_dups:
+			if i > 1:
+				adj_nans += i
+		assert adj_nans <= adj_nan, 'Too many nan next to each other'
 		
 		# Check argument for imputation
 		assert self.imputation_type != None, 'Missing argument for imputation_type'
