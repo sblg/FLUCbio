@@ -16,7 +16,9 @@ The package provides two main methods of measuring fluctuation
 
 It also includes the AUC so that there is the possibility of comparing
 
-<b> Fluctuation measures using ***_fluc_measure()_*** function</b>
+
+
+<b> Fluctuation measures using ***_fluc_measure()_*** </b>
 
 The first measure uses the discrete second derivative as a measure of volatility. Summing up every turn the curve takes gives the wanted measure:
 
@@ -69,41 +71,39 @@ these has to be checked.. and implemented
 
 Parameters | Type | Description
 ------------ | -------------  | ---------------------
-`data` |_pandas dataframe, numpy array, list of list or tuple_ |Data will be 
+`data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
 
 
 
 `FLUCbio.impute_data(data, imputation_type)`
 
-Missing data 
-•	Percentage limit 
-•	Different ways to impute?
-•	Error messages if too much missing? And information on what has been imputed on
+The impute function is used before the other tools in case of missing data or unevenly distanced data points. 
+There is an upper limit for imputation of 25% missing data. If more missing data than this the function will raise an error. Furthermore is it possible to put a limit on how many missing values can be next to each other. If too many are next to each other, it is hard to impute getting a realistic output. The _adj_nan_ parameter is choosing how many adjacent nan or missing values can be accepted. The imputation is done using scipy.interpolate.interp1d and therefore accepts input that this function would take.
 
 
 Parameters | Type | Description
 ------------ | ------------- | ---------------------
-`data` |_pandas dataframe, numpy array, <br/>list of list or tuple_ |blablabla
-`imputation_type` |_str or int, optional_ |default
-
+`data` |_pandas dataframe, numpy array, <br/>list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
+`imputation_type` |_str or int, optional_ |(from scipy.interpolate.interp1d: Specifies the kind of interpolation as a string (‘linear’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘previous’, ‘next’, where ‘zero’, ‘slinear’, ‘quadratic’ and ‘cubic’ refer to a spline interpolation of zeroth, first, second or third order; ‘previous’ and ‘next’ simply return the previous or next value of the point) or as an integer specifying the order of the spline interpolator to use. Default is ‘linear’.)
+`adj_nan` |_int, optional_ |Default is 2.
 
 `FLUCbio.image_interpretation(data, num_interp_pts, grid_size, interpolation_type, lower_bound, upper_bound)`
 
 Parameters | Type | Description
 ------------ | ------------- | ---------------------
-`data` |_pandas dataframe, numpy array,<br/> list of list or tuple_ |blablabla
-`num_interp_pts` |_int, optional_ |blablabla
-`grid_size` |_int, optional_ |blablabla
-`interpolation_type` |_str or int, optional_ |blablabla
-`lower_bound` |_int or float, optional_ |blablabla
-`upper_bound` |_int or float, optional_ |blablabla
+`data` |_pandas dataframe, numpy array,<br/> list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
+`num_interp_pts` |_int, optional_ |Default is 100.
+`grid_size` |_int, optional_ |The value is used for creating a _n_ x _n_ grid. Default value for _n_ is 10.
+`interpolation_type` |_str or int, optional_ |Default is 'linear'
+`lower_bound` |_int or float, optional_ |A value for lower boundary of the grid. Default is minimum measured value of input data.
+`upper_bound` |_int or float, optional_ |A value for upper boundary of the grid. Default is maximum measured value of input data.
 
 
 `FLUCbio.clust_sum(image)`
 
 Parameters | Type | Description
 ------------ | ------------- | ----------------
-`image` |_numpy array or list_ | blablabla
+`image` |_numpy array or list_ | 1-D input with 0's and 1's only
  
 
 ## Examples
@@ -115,7 +115,7 @@ The example data is based on a postprandial (after meal) variable blood glucose.
 >>> glucose_sample = FLUCbio.getData(data='test_glucose').data
 >>> imputed_glucose_sample = FLUCbio.impute_data(glucose_sample).imputed
 >>> fluctuation = FLUCbio.fluc_measure(imputed_glucose_sample)
->>> image = FLUCbio.image_interpretation(imputed_glucose_sample).image
+>>> image = FLUCbio.image_interpretation(imputed_glucose_sample,interpolation_type='cubic').image
 >>> cluster_sum, summed_ones = FLUCbio.clust_sum(image)
 ```
 
