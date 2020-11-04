@@ -19,7 +19,7 @@ import pandas as pd  # can be removed
 # implement when there is both nan and a hole
 
 
-def impute_data(postprandial_data, imputation_type=None):
+def impute_data(postprandial_data, imputation_type='linear'):
 	""" Imputes missing data or add imputed measures for unevenly distributed data """
 	
 	# Class object is created
