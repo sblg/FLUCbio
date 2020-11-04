@@ -3,20 +3,24 @@
 
 ## Analysing fluctuation and/or variation in biological data
 
-FLUCbio is a python toolbox package useful for obtaining measures of fluctuation/variation for longitudinal biological data. This can be particularly helpful if the data is to be used in certain methods/tools expecting the data to be independent of time (eg. using a Random Forest in Machine Learning). 
+FLUCbio is a python toolbox package useful for obtaining measures of fluctuation/variation for longitudinal biological data thereby avoiding the use of AUC as a single important measure. This can be particularly helpful if the data is to be used in certain methods/tools expecting the data to be independent of time (eg. using a Random Forest in Machine Learning). 
 
 The package uses simple methods to obtain fluctuation measure both to keep it logical and to not overcompensate making it unusable for small data sets. The input must be measurements of the biological variable eg. blood marker and the time points at which these were taken (given in a time unit). For now all measures are based on evenly distributed data (consistent time interval between measurements) but if a few measurements are not taken due to clinical setup the missing data points can be imputed together with missing values (using interpolating function).
 
 
-#### Measures of fluctuation or variation
+### Measures of fluctuation or variation
 
 The package provides two main methods of measuring fluctuation
 1. Calculated measures of fluctuation/variation
 1. Imaging approach
 
-<b> Fluctuation measures </b>
+It also includes the AUC so that there is the possibility of comparing
 
-The first one uses the discrete second derivative as a measure of volatility. Summing up every turn the curve takes gives the wanted measure:
+<b> Fluctuation measures using ***_fluc_measure()_*** function</b>
+
+
+
+The first measure uses the discrete second derivative as a measure of volatility. Summing up every turn the curve takes gives the wanted measure:
 
 <img src="https://latex.codecogs.com/svg.latex?\fn_jvn&space;fluc(y)&space;=&space;\sum_{i=2}^{len(x)-1}abs((y_i-y_{i-1})-(y_{i&plus;1}-y_i))" title="fluc(y) = \sum_{i=2}^{len(y)-1}abs((y_i-y_{i-1})-(y_{i+1}-y_i))" />
 
@@ -31,13 +35,13 @@ Another measure can provide information on variation rather than fluctuation. He
 Another function can turn the observed measures into a image like grid with binary values for where the observed values are located (true/1) and this “image” can in turn be evaluated for how peaky and volatile it is by summing up the number of true/1 values. 
 
 
-<b> sum_ones </b>
+<b> Sum of ones </b>
 
 
-<b> clust_sum </b>
+<b> Clustered sum of ones </b>
 
 
-Functions for calculating a measure of fluctuation based on summing up a discrete second derivative thereby catching how peaky and volatile the observed measures are. 
+
 
 
 
@@ -86,20 +90,12 @@ these has to be checked.. and implemented
 
 ## Functions
 
-***fluc_measure()***
-
-latest update v0.8.8 ??
 
 `FLUCbio.fluc_measure(data)`
 
 Parameters | Description
 ------------ | -------------
 `data` |Pandas dataframe, numpy array, list of list or tuple are accepted inputs
-
-
-
-
-***impute_data()***
 
 
 
@@ -111,10 +107,6 @@ Parameters | Description
 `imputation_type` |str or int 
 
 
-
-
-***image_interpretation()***
-
 `FLUCbio.image_interpretation(data, num_interp_pts, grid_size, interpolation_type, lower_bound, upper_bound)`
 
 Parameters | Description
@@ -125,10 +117,6 @@ Parameters | Description
 `interpolation_type` |str or int 
 `lower_bound` |int or float
 `upper_bound` |int or float 
-
-
-
-***clust_sum()***
 
 
 `FLUCbio.clust_sum(image)`
@@ -143,7 +131,7 @@ Parameters | Description
 
 ## Examples
 
-The example is based on a postprandial (after meal) variable blood glucose.
+The example data is based on a postprandial (after meal) variable blood glucose.
 
 ```python
 >>> import FLUCbio
