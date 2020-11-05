@@ -7,7 +7,7 @@ Created on Fri Oct 23 11:29:48 2020
 import numpy as np
 import pandas as pd
 import scipy.interpolate 
-import intertools
+import itertools
 
 class dataClass:
 	
