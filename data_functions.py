@@ -382,10 +382,6 @@ class dataClass:
 
 
 
-
-
-
-
 def lower_bounds(self):
 	
 	if not self.lower_bound:
@@ -423,7 +419,4 @@ class getData:
 		else:
 			print('Error: Provide correct parameter for data\n') 
 
-
-#test = getData('test_glucose').data
-	
 		
