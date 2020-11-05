@@ -134,8 +134,9 @@ The example data is based on a postprandial (after meal) variable blood glucose.
 
 >>> dataObject = FLUCbio.image_interpretation(imputed_glucose_sample,interpolation_type='cubic')
 >>> print(dataObject.image)
->>> summed_ones = FLUCbio.clust_sum(dataObject).all_sums
->>> clust_ones = FLUCbio.clust_sum(dataObject).all_cluster
+>>> dataObject = FLUCbio.clust_sum(dataObject)
+>>> print(dataObject.all_sums)
+>>> print(dataObject.all_cluster)
 ```
 
 ## Requirements
