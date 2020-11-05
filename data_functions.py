@@ -208,7 +208,29 @@ class dataClass:
 					impValue = f(self.imputed[0][timeindex])
 					self.imputed[1][timeindex] = impValue
 				
-			
+	def fluctuation(self):
+		# Extract variable measures
+		pp_list = self.imputed[1]
+		
+		# Calculate measure of fluctuation
+		differences,diff_of_diff = [],[] 
+		
+		temp_list = np.zeros(len(pp_list)-1)
+            
+		for index in range(len(pp_list)):
+			if index != 0:
+				temp_list[index-1] = abs(pp_list[index] - pp_list[index-1])
+				differences.append(pp_list[index] - pp_list[index-1])
+		for index in range(len(differences)):
+			if index != 0:
+				diff_of_diff.append(abs(differences[index] - differences[index-1]))
+		self.fluc_meas = sum(diff_of_diff)
+		self.var_meas = sum(temp_list)/len(pp_list)
+		
+		assert self.fluc_meas >= 0, "Fluctuation should be positive"
+		assert self.var_meas >= 0, "Variation should be positive"
+		
+	
 	def image(self):
 		
 		# check arguments for imaging
@@ -341,7 +363,17 @@ class dataClass:
 		# OBS check if image is correct!
 		
 	def clustering(self):
-		print(self.image)
+		self.all_sums = []
+		self.all_cluster = []
+	
+		all_sums.append(sum(image))
+		
+		count_dups = [sum(1 for _ in group) for _, group in itertools.groupby(image) if _ != 0]
+		sum_ = 0
+		for i in count_dups:
+			if i > 1:
+				sum_ += i
+		all_cluster.append(sum_)
 
 
 
