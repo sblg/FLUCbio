@@ -226,6 +226,7 @@ class dataClass:
 				diff_of_diff.append(abs(differences[index] - differences[index-1]))
 		self.fluc_meas = sum(diff_of_diff)
 		self.var_meas = sum(temp_list)/len(pp_list)
+		self.auc = np.trapz(pp_list)
 		
 		assert self.fluc_meas >= 0, "Fluctuation should be positive"
 		assert self.var_meas >= 0, "Variation should be positive"
