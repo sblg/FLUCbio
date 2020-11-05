@@ -202,11 +202,14 @@ class dataClass:
 					ppData_filt = ppData_filt[filter_criteria.index[filter_criteria]]
 					
 					# Interpolation function
-					f = scipy.interpolate.interp1d(np.asarray(ppData_filt.iloc[0]),np.asarray(ppData_filt.iloc[1]), kind=self.imputation_type)
+					f = scipy.interpolate.interp1d(np.asarray(ppData_filt.iloc[0]),np.asarray(ppData_filt.iloc[1]), kind=self.imputation_type, fill_value="extrapolate")
 					
 					# Imputation
 					impValue = f(self.imputed[0][timeindex])
-					self.imputed[1][timeindex] = impValue
+					if impValue > 0:
+						self.imputed[1][timeindex] = impValue
+					else:
+						raise ValueError('Negative value imputed')
 				
 	def fluctuation(self):
 		# Extract variable measures
