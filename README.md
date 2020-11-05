@@ -120,7 +120,7 @@ returns a dataClass object with _.all_sums_ and _.all_cluster_ being the two out
 
 ## Examples
 
-The example data is based on a postprandial (after meal) variable blood glucose.
+The example data is based on a postprandial (after meal) variable blood glucose. NB! The input data has to have time measures as first dimension and measures as second.
 
 ```python
 >>> import FLUCbio
