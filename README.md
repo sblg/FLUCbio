@@ -120,9 +120,15 @@ The example data is based on a postprandial (after meal) variable blood glucose.
 >>> import FLUCbio
 >>> glucose_sample = FLUCbio.getData(data='test_glucose').data
 >>> imputed_glucose_sample = FLUCbio.impute_data(glucose_sample).imputed
->>> fluctuation = FLUCbio.fluc_measure(imputed_glucose_sample)
->>> image = FLUCbio.image_interpretation(imputed_glucose_sample,interpolation_type='cubic').image
->>> cluster_sum, summed_ones = FLUCbio.clust_sum(image)
+
+>>> dataObject = FLUCbio.fluc_measure(imputed_glucose_sample)
+>>> print(dataObject.fluc_meas)
+>>> print(dataObject.var_meas)
+
+>>> dataObject = FLUCbio.image_interpretation(imputed_glucose_sample,interpolation_type='cubic')
+>>> print(dataObject.image)
+>>> summed_ones = FLUCbio.clust_sum(dataObject).all_sums
+>>> clust_ones = FLUCbio.clust_sum(dataObject).all_cluster
 ```
 
 ## Requirements
