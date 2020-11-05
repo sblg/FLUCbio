@@ -130,7 +130,7 @@ class dataClass:
 		self.imputed = self.input.copy()
 		self.evenly_dist =self.input.copy()
 	
-	def insert_missing(self):
+	def insert_missing(self,adj_nan):
 		
 		# Check for need of imputation
 		assert(any(time_interval != self.time_intervals[0] for time_interval in self.time_intervals) 
@@ -153,22 +153,28 @@ class dataClass:
 				if skipped_int == 0:
 					continue
 				
-				# Insert one extra observation
-				if skipped_int == 1:
-					self.evenly_dist = np.insert(self.evenly_dist, [i+1], self.evenly_dist[0][i] + self.MIN_TIME_INT, axis=1)  
-					self.evenly_dist[1][i+1] = -1
+				elif adj_nan > skipped_int > 0:
+					for missing in range(1,int(skipped_int)+1):
+						# explain this 
+						self.evenly_dist = np.insert(self.evenly_dist, [i+missing], self.evenly_dist[0][i] + missing*self.MIN_TIME_INT, axis=1)
+						self.evenly_dist[1][i+missing] = -1				
 					i = i+1
-				
-				# Insert two extra observations
-				elif skipped_int == 2:
-					self.evenly_dist = np.insert(self.evenly_dist, [i+1], self.evenly_dist[0][i] + self.MIN_TIME_INT, axis=1)  
-					self.evenly_dist = np.insert(self.evenly_dist, [i+2], self.evenly_dist[0][i] + 2*self.MIN_TIME_INT, axis=1)  
-					self.evenly_dist[1][i+1] = -1
-					self.evenly_dist[1][i+2] = -1
-					i = i+2
+#				# Insert one extra observation
+#				if skipped_int == 1:
+#					self.evenly_dist = np.insert(self.evenly_dist, [i+1], self.evenly_dist[0][i] + self.MIN_TIME_INT, axis=1)  
+#					self.evenly_dist[1][i+1] = -1
+#					i = i+1
+#				
+#				# Insert two extra observations
+#				elif skipped_int == 2:
+#					self.evenly_dist = np.insert(self.evenly_dist, [i+1], self.evenly_dist[0][i] + self.MIN_TIME_INT, axis=1)  
+#					self.evenly_dist = np.insert(self.evenly_dist, [i+2], self.evenly_dist[0][i] + 2*self.MIN_TIME_INT, axis=1)  
+#					self.evenly_dist[1][i+1] = -1
+#					self.evenly_dist[1][i+2] = -1
+#					i = i+2
 					
 				else:
-					raise NotImplementedError('The method is only implemented for maximum two following missing time measurements in an evenly distributed time series.')
+					raise NotImplementedError('Too many missing time measurements in a row.')
 		
 		self.time_intervals = [-(self.input[0][i-1]-time) for i,time in enumerate(self.input[0]) if i!=0 ]
 		self.imputed = self.evenly_dist.copy()
