@@ -114,7 +114,7 @@ returns a dataClass object with _.image_ being the image vector
 
 Parameters | Type | Description
 ------------ | ------------- | ----------------
-`image` |_class_ | dataObject obtained from _image_interpretation()_
+`image` |_class_ | class object obtained from _image_interpretation()_
  
 returns a dataClass object with _.all_sums_ and _.all_cluster_ being the two outcome measures
 
