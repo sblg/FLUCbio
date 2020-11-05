@@ -106,7 +106,7 @@ Parameters | Type | Description
 `lower_bound` |_int or float, optional_ |A value for lower boundary of the grid. Default is minimum measured value of input data.
 `upper_bound` |_int or float, optional_ |A value for upper boundary of the grid. Default is maximum measured value of input data.
 
-returns a dataClass object
+returns a dataClass object with _.image_ being the image vector
 
 ***_clust_sum()_***
 
@@ -116,7 +116,7 @@ Parameters | Type | Description
 ------------ | ------------- | ----------------
 `image` |_numpy array or list_ | 1-D input with 0's and 1's only
  
-returns a dataClass object
+returns a dataClass object with _.all_sums_ and _.all_cluster_ being the two outcome measures
 
 ## Examples
 
