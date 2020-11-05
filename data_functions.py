@@ -367,7 +367,7 @@ class dataClass:
 		
 		# OBS check if image is correct!
 		
-	def clustering(self):
+	def clustering(self, all_sums, all_cluster):
 		self.all_sums = []
 		self.all_cluster = []
 	
