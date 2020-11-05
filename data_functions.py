@@ -370,7 +370,7 @@ class dataClass:
 	def clustering(self):
 		self.all_sums=[]
 		self.all_cluster=[]
-		self.all_sums.append(sum(image))
+		self.all_sums.append(sum(self.image))
 		
 		count_dups = [sum(1 for _ in group) for _, group in itertools.groupby(self.image) if _ != 0]
 		sum_ = 0
