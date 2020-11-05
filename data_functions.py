@@ -158,7 +158,7 @@ class dataClass:
 						# explain this 
 						self.evenly_dist = np.insert(self.evenly_dist, [i+missing], self.evenly_dist[0][i] + missing*self.MIN_TIME_INT, axis=1)
 						self.evenly_dist[1][i+missing] = -1				
-					i = i+1
+					i = i+missing
 #				# Insert one extra observation
 #				if skipped_int == 1:
 #					self.evenly_dist = np.insert(self.evenly_dist, [i+1], self.evenly_dist[0][i] + self.MIN_TIME_INT, axis=1)  
