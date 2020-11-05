@@ -73,7 +73,7 @@ these has to be checked.. and implemented
 
 Parameters | Type | Description
 ------------ | -------------  | ---------------------
-`data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
+`input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
 
 returns a dataClass object including _.auc_, _.fluc_meas_, _.var_meas_
 
@@ -87,7 +87,7 @@ There is an upper limit for imputation of 25% missing data. If more missing data
 
 Parameters | Type | Description
 ------------ | ------------- | ---------------------
-`data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
+`input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
 `imputation_type` |_str or int, optional_ |(from scipy.interpolate.interp1d: Specifies the kind of interpolation as a string (‘linear’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘previous’, ‘next’, where ‘zero’, ‘slinear’, ‘quadratic’ and ‘cubic’ refer to a spline interpolation of zeroth, first, second or third order; ‘previous’ and ‘next’ simply return the previous or next value of the point) or as an integer specifying the order of the spline interpolator to use. Default is ‘linear’.) For 'slinear' and 'linear' border values (first and last time point) cannot be imputed. 
 `adj_nan` |_int, optional_ |Maximum number of adjacent nan/missing values. Default is 2.
 
@@ -99,7 +99,7 @@ returns a dataClass object with _.input_ being data input and _.imputed_ being t
 
 Parameters | Type | Description
 ------------ | ------------- | ---------------------
-`data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
+`input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
 `num_interp_pts` |_int, optional_ |Default is 100.
 `grid_size` |_int, optional_ |The value is used for creating a _n_ x _n_ grid. Default value for _n_ is 10.
 `interpolation_type` |_str or int, optional_ |Default is 'linear'
@@ -110,11 +110,11 @@ returns a dataClass object with _.image_ being the image vector
 
 ***_clust_sum()_***
 
-`FLUCbio.clust_sum(image)`
+`FLUCbio.clust_sum(class)`
 
 Parameters | Type | Description
 ------------ | ------------- | ----------------
-`image` |_numpy array or list_ | 1-D input with 0's and 1's only
+`image` |_class_ | dataObject obtained from _image_interpretation()_
  
 returns a dataClass object with _.all_sums_ and _.all_cluster_ being the two outcome measures
 
