@@ -75,6 +75,7 @@ Parameters | Type | Description
 ------------ | -------------  | ---------------------
 `data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
 
+returns a dataClass object
 
 ***_impute_data()_***
 
@@ -90,6 +91,8 @@ Parameters | Type | Description
 `imputation_type` |_str or int, optional_ |(from scipy.interpolate.interp1d: Specifies the kind of interpolation as a string (‘linear’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘previous’, ‘next’, where ‘zero’, ‘slinear’, ‘quadratic’ and ‘cubic’ refer to a spline interpolation of zeroth, first, second or third order; ‘previous’ and ‘next’ simply return the previous or next value of the point) or as an integer specifying the order of the spline interpolator to use. Default is ‘linear’.) For 'slinear' and 'linear' border values (first and last time point) cannot be imputed. 
 `adj_nan` |_int, optional_ |Maximum number of adjacent nan/missing values. Default is 2.
 
+returns a dataClass object
+
 ***_image_interpretation()_***
 
 `FLUCbio.image_interpretation(data, num_interp_pts, grid_size, interpolation_type, lower_bound, upper_bound)`
@@ -103,6 +106,8 @@ Parameters | Type | Description
 `lower_bound` |_int or float, optional_ |A value for lower boundary of the grid. Default is minimum measured value of input data.
 `upper_bound` |_int or float, optional_ |A value for upper boundary of the grid. Default is maximum measured value of input data.
 
+returns a dataClass object
+
 ***_clust_sum()_***
 
 `FLUCbio.clust_sum(image)`
@@ -111,6 +116,7 @@ Parameters | Type | Description
 ------------ | ------------- | ----------------
 `image` |_numpy array or list_ | 1-D input with 0's and 1's only
  
+returns a dataClass object
 
 ## Examples
 
