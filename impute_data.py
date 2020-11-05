@@ -14,12 +14,12 @@ def impute_data(postprandial_data, imputation_type='linear', adj_nan=2, nan=True
 	data_info = data_tools.dataClass(postprandial_data, imputation_type=imputation_type)
 	
 	# Data check is performed 
-	data_info.data_check(nan=nan)
+	data_info.data_check(nan)
 	
 	# Check if holes in time (unevenly) and if so add extra imputed measurements
-	data_info.insert_missing()	
+	data_info.insert_missing(adj_nan)	
 	
 	# Do imputation and return class
-	data_info.impute_data(adj_nan=adj_nan)	
+	data_info.impute_data(adj_nan)	
 	return(data_info)
 
