@@ -12,21 +12,18 @@ import itertools
 class dataClass:
 	
 	"""
+	Collection of data tools for analysis of fluctuation/variation. Initiation of dataClass object includes a data check ensuring data 
+	credibility and quality. 
 	
-	A dataclass to collect all knowledge on the data. 
+	Callable functions included in the dataClass class is one for imputation of data, one for calculating fluctuation measures, 
+	one for interpreting the data as an image and lastly one for summing up 1s and adjacent 1s from the image result of previously mentioned function.
+
+	How to use help
 	
-	Other functions can be run
-	independently on this. 
-	
-	Contains a data check function and a missing data function to insert time 
-	points where missing.
-	.
 	
 	"""	
-		
 	
 	def __init__(self, input_data, num_interp_pts=100, grid_size=10, interpolation_type='linear', lower_bound=None, upper_bound=None, imputation_type=None):
-		
 		
 		self.input = input_data
 		
@@ -55,7 +52,6 @@ class dataClass:
 		
 		# run more checks on input arg here end less in functions ???
 		
-		
 		self.imputation_type = imputation_type
 		self.num_interp_pts = num_interp_pts
 		self.grid_size = grid_size
@@ -67,11 +63,15 @@ class dataClass:
 	
 	def data_check(self,nan=True):
 		
+		"""
+		Function checks that data has same number of observations for time and measurements, then converts all possible nan values into np.nan type.
+		Data is checked for consisting of only positive, numerical values. Lastly the data is checked for being sorted and for its time intervals. 
+		If the time intervals cannot be made evenly by simple insertion of data points an error is raised.
+		
+		"""
 		self.anyNan = False
 		
-		# Check that number of measurements equal number of time points
 		assert len(self.input[0])==len(self.input[1]), 'Number of values does not match for time and measurements.'
-		
 		
 		# Using function on data containing Nan or missing values
 		if nan == True:
@@ -84,7 +84,7 @@ class dataClass:
 				# Convert back to tuple type
 				self.input = (self.input[0:self.num_timepoints],self.input[self.num_timepoints:len(self.input)])
 				
-				# check for too many nans - OBS Can this be done in one line?
+				# check for too many nans 
 				assert sum(np.isnan(element) for element in self.input[0]) <= int(len(self.input[0])/4), 'Too many missing time values'
 				assert sum(np.isnan(element) for element in self.input[1]) <= int(len(self.input[1])/4), 'Too many missing measurement values'
 			elif any(type(value)==str for variable in self.input for value in variable):
@@ -132,55 +132,52 @@ class dataClass:
 	
 	def insert_missing(self,adj_nan):
 		
-		# Check for need of imputation
-		assert(any(time_interval != self.time_intervals[0] for time_interval in self.time_intervals) 
-		or self.anyNan == True),'No need for imputation. It was not implemented. See help(FlucAnalysis.dataClass.insert_missing) for how to use function.'
+		"""
+		The missing values existing as a cause of missing measurements are checked for here and time points with negative values are inserted 
+		for these to prepare for the imputation function.
 		
+		"""
+		
+		# Error check for need of imputation
+		assert(any(time_interval != self.time_intervals[0] for time_interval in self.time_intervals) 
+		or self.anyNan == True),'No need for imputation. It was not implemented. See help(FlucAnalysis.dataClass.insert_missing) for how to use function.' # OBS help
 		
 		# Use remainder to see if the intervals are possible to make evenly
-		bool_no_remainder = [time_interval % self.MIN_TIME_INT == 0 for time_interval in self.time_intervals] # instead of timeInt should I do it for ppData[0]?
+		bool_no_remainder = [time_interval % self.MIN_TIME_INT == 0 for time_interval in self.time_intervals] 
 		
 		if False in bool_no_remainder:
 			raise ValueError('The interval sizes are too random and cannot be made evenly. ')
 		
 		else:
-			
-			i = -1
-			# Skipped_int tells if an interval is skipped and should be inserted 
+			# Check for skipped interval steps that should be inserted. If several are skipped insert time points in a loop
+			index_counter = -1
 			for skipped_int in [time_interval/self.MIN_TIME_INT-1 for time_interval in self.time_intervals]:
 				
-				i = i+1						
+				index_counter = index_counter+1						
 				if skipped_int == 0:
 					continue
 				
 				elif adj_nan > skipped_int > 0:
 					for missing in range(1,int(skipped_int)+1):
-						# explain this 
-						self.evenly_dist = np.insert(self.evenly_dist, [i+missing], self.evenly_dist[0][i] + missing*self.MIN_TIME_INT, axis=1)
-						self.evenly_dist[1][i+missing] = -1				
-					i = i+missing
-#				# Insert one extra observation
-#				if skipped_int == 1:
-#					self.evenly_dist = np.insert(self.evenly_dist, [i+1], self.evenly_dist[0][i] + self.MIN_TIME_INT, axis=1)  
-#					self.evenly_dist[1][i+1] = -1
-#					i = i+1
-#				
-#				# Insert two extra observations
-#				elif skipped_int == 2:
-#					self.evenly_dist = np.insert(self.evenly_dist, [i+1], self.evenly_dist[0][i] + self.MIN_TIME_INT, axis=1)  
-#					self.evenly_dist = np.insert(self.evenly_dist, [i+2], self.evenly_dist[0][i] + 2*self.MIN_TIME_INT, axis=1)  
-#					self.evenly_dist[1][i+1] = -1
-#					self.evenly_dist[1][i+2] = -1
-#					i = i+2
+						# First the missing observation(s) is added by time point value in both time point and measurement series
+						self.evenly_dist = np.insert(self.evenly_dist, [index_counter+missing], self.evenly_dist[0][index_counter] + missing*self.MIN_TIME_INT, axis=1)
+						# Secondly the measurement value(s) are exchanged for negative values that can later be imputed 
+						self.evenly_dist[1][index_counter+missing] = -1				
+					index_counter = index_counter+missing
 					
 				else:
 					raise NotImplementedError('Too many missing time measurements in a row.')
-		
+					
 		self.time_intervals = [-(self.input[0][i-1]-time) for i,time in enumerate(self.input[0]) if i!=0 ]
 		self.imputed = self.evenly_dist.copy()
 		self.num_timepoints = len(np.unique(self.evenly_dist[0]))
-	
+		
 	def impute_data(self,adj_nan):
+		
+		""" 
+		First a check that the amount of missingness is not above threshold and that imputation type is implemented. 
+		Then the imputation is done using spline interpolation with extrapolation feature ensuring possibility of imputing end measures.
+		"""
 		
 		# Check how many nan are adjacent
 		bool_nan = np.isnan(self.imputed)		
@@ -196,29 +193,31 @@ class dataClass:
 		if self.imputation_type not in ['slinear','quadratic','cubic','linear','nearest']:
 			raise NotImplementedError('%s is unsupported for imputation using interpolation' % self.imputation_type) 
 		
-		
 		# Imputation using spline
-		if self.imputation_type in ['slinear','quadratic','cubic','linear','nearest']:
-			for timeindex, measurement in enumerate(self.imputed[1]):
+		for timeindex, measurement in enumerate(self.imputed[1]):
 				
-				if measurement < 0 or np.isnan(measurement) == True:   
+			if measurement < 0 or np.isnan(measurement) == True:   
 					
-					# Use data filtered for missing values and nan to interpolate				
-					ppData_filt = pd.DataFrame(self.imputed)
-					filter_criteria = ppData_filt.iloc[1,:] >= 0 
-					ppData_filt = ppData_filt[filter_criteria.index[filter_criteria]]
-					
-					# Interpolation function
-					f = scipy.interpolate.interp1d(np.asarray(ppData_filt.iloc[0]),np.asarray(ppData_filt.iloc[1]), kind=self.imputation_type, fill_value="extrapolate")
-					
-					# Imputation
-					impValue = f(self.imputed[0][timeindex])
-					if impValue > 0:
-						self.imputed[1][timeindex] = impValue
-					else:
-						raise ValueError('Negative value imputed')
+				# Use data filtered for missing values and nan to interpolate				
+				ppData_filt = pd.DataFrame(self.imputed)
+				filter_criteria = ppData_filt.iloc[1,:] >= 0 
+				ppData_filt = ppData_filt[filter_criteria.index[filter_criteria]]
+				
+				# Interpolation function
+				f = scipy.interpolate.interp1d(np.asarray(ppData_filt.iloc[0]),np.asarray(ppData_filt.iloc[1]), kind=self.imputation_type, fill_value="extrapolate")
+				
+				# Imputation using function
+				impValue = f(self.imputed[0][timeindex])
+				if impValue > 0:
+					self.imputed[1][timeindex] = impValue
+				else:
+					raise ValueError('Negative value imputed')
 				
 	def fluctuation(self):
+		
+		"""
+		Fluctuation and variation measures are calculated together with area under the curve. 
+		"""
 		# Extract variable measures
 		pp_list = self.imputed[1]
 		
@@ -227,6 +226,7 @@ class dataClass:
 		
 		temp_list = np.zeros(len(pp_list)-1)
             
+		# Calculation of the fluctuation by summing up differences of differences
 		for index in range(len(pp_list)):
 			if index != 0:
 				temp_list[index-1] = abs(pp_list[index] - pp_list[index-1])
@@ -244,8 +244,16 @@ class dataClass:
 	
 	def image(self):
 		
-		# check arguments for imaging
+		"""
+		The imaging is done in four steps:
+		1. Boundaries are defined as lower boundaries for both time (x) and measures (y)
+		2. Extra time points are added using interpolation 
+		3. For the observation pairs (time, measurement) the lower boundary for both axis are saved
+		4. Going through the grid using the lower boundaries of each observation pair to read if data exists in grid square or not
+		assigning 1 to image if exists indeed and 0 if not
+		"""
 		
+		# check arguments for imaging
 		assert self.grid_size > 0, 'Grid size cannot be negative'
 		
 		if self.interpolation_type not in ['slinear','quadratic','cubic','linear','nearest']:
@@ -373,7 +381,11 @@ class dataClass:
 		
 		# OBS check if image is correct!
 
+		
 	def clustering(self):
+		"""
+		
+		"""
 		self.all_sums=[]
 		self.all_cluster=[]
 		self.all_sums.append(sum(self.image))
