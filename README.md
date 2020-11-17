@@ -75,7 +75,7 @@ The auc is calculated as the integral along the time axis using the composite tr
 
 Parameters | Type | Description
 ------------ | -------------  | ---------------------
-`input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
+`input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second. Expects evenly distributed data with no missing values.
 
 returns a dataClass object including _.auc_, _.fluc_meas_, _.var_meas_
 
@@ -101,7 +101,7 @@ returns a dataClass object with _.input_ being data input and _.imputed_ being t
 
 Parameters | Type | Description
 ------------ | ------------- | ---------------------
-`input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
+`input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second. Expects evenly distributed data with no missing values.
 `num_interp_pts` |_int, optional_ |Default is 100.
 `grid_size` |_int, optional_ |The value is used for creating a _n_ x _n_ grid. Default value for _n_ is 10.
 `interpolation_type` |_str or int, optional_ |Default is 'linear'
