@@ -8,7 +8,7 @@ import FLUCbio.data_functions as data_tools
 
 
 def impute_data(postprandial_data, imputation_type='linear', adj_nan=2, nan=True):
-	""" Imputes missing data or add imputed measures for unevenly distributed data """
+	""" Imputes missing data and/or add imputed measures for unevenly distributed data """
 	
 	# Class object is created
 	data_info = data_tools.dataClass(postprandial_data, imputation_type=imputation_type)
