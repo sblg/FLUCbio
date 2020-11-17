@@ -67,7 +67,7 @@ these has to be checked.. and implemented
 
 ## Functions
 
-Calling _fluc_measure()_, _impute_data()_ or _image_interpretation()_ a dataClass object is created. From this some information on data as well as default setting can be retrieved:
+Calling _fluc_measure()_, _impute_data()_ or _image_interpretation()_ a dataClass object is created. From this some information on data as well as default or chosen setting can be retrieved:
 - _.input_
 - _.num_timepoints_
 - _.imputation_type_
