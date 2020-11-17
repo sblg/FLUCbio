@@ -103,7 +103,7 @@ Parameters | Type | Description
 ------------ | ------------- | ---------------------
 `input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second. Expects evenly distributed data with no missing values.
 `num_interp_pts` |_int, optional_ |Default is 100.
-`grid_size` |_int, optional_ |The value is used for creating a _n_ x _n_ grid. Default value for _n_ is 10.
+`grid_size` |_int, optional_ |The value is used for creating a _n_ x _n_ grid. Default value for _n_ is 10. The higher value of _n_ the finer is the grid. To catch fluctuation make sure to have a high number of interpolated points when using a fine grid. 
 `interpolation_type` |_str or int, optional_ |Default is 'linear'
 `lower_bound` |_int or float, optional_ |A value for lower boundary of the grid. Default is minimum measured value of input data.
 `upper_bound` |_int or float, optional_ |A value for upper boundary of the grid. Default is maximum measured value of input data.
