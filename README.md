@@ -71,6 +71,8 @@ these has to be checked.. and implemented
 
 `FLUCbio.fluc_measure(data)`
 
+The auc is calculated as the integral along the time axis using the composite trapezoidal rule. Numpy's trapz function is used for this. 
+
 Parameters | Type | Description
 ------------ | -------------  | ---------------------
 `input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second
