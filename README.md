@@ -67,6 +67,18 @@ these has to be checked.. and implemented
 
 ## Functions
 
+Calling _fluc_measure()_, _impute_data()_ or _image_interpretation()_ a dataClass object is created. From this some information on data as well as default setting can be retrieved:
+- _.input_
+- _.num_timepoints_
+- _.imputation_type_
+- _.grid_size_
+- _.lower_bound_
+- _.upper_bound_
+- _.interpolation_type_
+- _.num_interp_pts_
+
+
+
 ***_fluc_measure()_***
 
 `FLUCbio.fluc_measure(data)`
@@ -77,7 +89,8 @@ Parameters | Type | Description
 ------------ | -------------  | ---------------------
 `input_data` |_pandas dataframe, numpy array, list of list or tuple_ |2-D input with time points being the first dimension and measurements being the second. Expects evenly distributed data with no missing values.
 
-returns a dataClass object including _.auc_, _.fluc_meas_, _.var_meas_
+returns a dataClass object including extra variables _.auc_, _.fluc_meas_, _.var_meas_
+
 
 ***_impute_data()_***
 
@@ -93,7 +106,7 @@ Parameters | Type | Description
 `imputation_type` |_str or int, optional_ |(from scipy.interpolate.interp1d: Specifies the kind of interpolation as a string (‘linear’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘previous’, ‘next’, where ‘zero’, ‘slinear’, ‘quadratic’ and ‘cubic’ refer to a spline interpolation of zeroth, first, second or third order; ‘previous’ and ‘next’ simply return the previous or next value of the point) or as an integer specifying the order of the spline interpolator to use. Default is ‘linear’.) For 'slinear' and 'linear' border values (first and last time point) cannot be imputed. 
 `adj_nan` |_int, optional_ |Maximum number of adjacent nan/missing values. Default is 2.
 
-returns a dataClass object with _.input_ being data input and _.imputed_ being the resulting data
+returns a dataClass object with _.input_ being the data input, _.imputed_ being the resulting data and _.adj_nan_ the chosen or default number of maximum adjacent missing values. 
 
 ***_image_interpretation()_***
 
