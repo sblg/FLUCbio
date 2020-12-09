@@ -84,6 +84,13 @@ class dataClass:
 				# Convert back to tuple type
 				self.input = (self.input[0:self.num_timepoints],self.input[self.num_timepoints:len(self.input)])
 				
+				# Get indices of missing data points from the data
+				nan_id = [index for index,value in enumerate(self.input[1]) if value is np.nan]
+				
+				# Now remove the values (time and missing value) from tuple
+				self.input = ([value for index,value in enumerate(self.input[0]) if index not in nan_id],[value for index,value in enumerate(self.input[1]) if index not in nan_id])
+				self.num_timepoints = len(np.unique(self.input[0]))
+				
 				# check for too many nans 
 				assert sum(np.isnan(element) for element in self.input[0]) <= int(len(self.input[0])/4), 'Too many missing time values'
 				assert sum(np.isnan(element) for element in self.input[1]) <= int(len(self.input[1])/4), 'Too many missing measurement values'
@@ -128,7 +135,7 @@ class dataClass:
 			raise ValueError('Non-numerical data in input')
 		
 		self.imputed = self.input.copy()
-		self.evenly_dist =self.input.copy()
+		self.evenly_dist = self.input.copy()
 	
 	def insert_missing(self,adj_nan):
 		
